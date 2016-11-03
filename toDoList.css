@@ -20,7 +20,7 @@ input {
 }
 
 #addMainItem {
-    background-color: sandybrown;
+    background-color: rgb(212,75,56);
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 40px;
@@ -39,7 +39,7 @@ ul span {
 
 ul li {
     position: relative;
-    background-color: greenyellow;
+    background-color: lightgreen;
     width: 50%;
     list-style-type: none;
     font-size: 24px;

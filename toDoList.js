@@ -3,7 +3,9 @@ function maxInputSize(event, max) {
         event.target.value = event.target.value.substring(0, max);
     }
 
-    if (event.keyCode===13) {inputCreate()||secondInputCreateElem(event)};
+    if (event.keyCode === 13) {
+        inputCreate() || secondInputCreateElem(event)
+    }
 }
 
 function inputCreate() {
@@ -138,6 +140,10 @@ function createElem(main, text) {
             firstLi.classList.add('second');
             firstLi = firstUl;
         }
+        firstLi.style.opacity = '0';
+        var id = setInterval(function () {
+            frameOpacity(id, firstLi, 1)
+        }, 40);
 
         this.appendChild(firstLi);
 
@@ -153,21 +159,31 @@ function createElem(main, text) {
     }
 }
 
+function frameOpacity(interval, element, upDown) {
+    var step;
+
+    if (upDown === 1) {
+        step = 0.1
+    } else {
+        step = -0.1
+    }
+
+    if ((upDown) && +element.style.opacity > upDown || (!upDown) && +element.style.opacity < upDown) {
+        clearInterval(interval);
+
+        if (!upDown) element.parentNode.removeChild(element);
+
+    } else {
+        element.style.opacity = +element.style.opacity + step;
+
+    }
+}
+
 function delCurrent(event) {
     var div = event.target.parentElement;
-
-    var id = setInterval(frame, 20);
-if (div.classList.contains('second')||div.classList.contains('third')) div=div.parentNode;
+    var id = setInterval(function () {frameOpacity(id, div, 0)}, 40);
+    if (div.classList.contains('second') || div.classList.contains('third')) div = div.parentNode;
     div.style.opacity = '1';
-    function frame() {
-
-        if (div.style.opacity === '0') {
-            clearInterval(id);
-            div.parentNode.removeChild(div);
-        } else {
-            div.style.opacity = div.style.opacity - 0.1
-        }
-    }
 }
 
 function upDownElement(event) {
@@ -175,7 +191,6 @@ function upDownElement(event) {
 
     if (lockElem.classList.contains('second') || lockElem.classList.contains('third')) {
         lockElem = lockElem.parentNode;
-
     }
 
     if (lockElem.previousSibling && event.target.classList.contains('scrollTop')) {
@@ -186,7 +201,6 @@ function upDownElement(event) {
     }
 
     if (targetElement && lockElem && lockElem.classList && !lockElem.classList.contains('removeItem')) {
-
         var id = setInterval(frame, 20);
         var pos1 = 0;
 
@@ -202,7 +216,6 @@ function upDownElement(event) {
                 lockElem.parentNode.insertBefore(targetElement.parentNode.removeChild(targetElement), lockElem);
             }
         }
-
     }
 }
 
