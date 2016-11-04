@@ -4,7 +4,11 @@ function maxInputSize(event, max) {
     }
 
     if (event.keyCode === 13) {
-        inputCreate() || secondInputCreateElem(event)
+
+        if (document.getElementById('secondInput')) {
+            secondInputCreateElem(event)
+        } else
+            inputCreate();
     }
 }
 
@@ -53,8 +57,11 @@ function secondInputCreate(event) {
 function secondInputCreateElem(event) {
     var e = event.target.parentNode.parentNode;
     e.createEl = createElem;
-    e.createEl(1, document.getElementById('secondInput').value);
-    e.removeChild(document.getElementById('addSecondItem'));
+
+    if (document.getElementById('secondInput')) {
+        e.createEl(1, document.getElementById('secondInput').value);
+        e.removeChild(document.getElementById('addSecondItem'));
+    }
 }
 
 //удалить элемент из DOM
@@ -182,8 +189,8 @@ function frameOpacity(interval, element, upDown) {
 function delCurrent(event) {
     var div = event.target.parentElement;
     var id = setInterval(function () {frameOpacity(id, div, 0)}, 40);
+
     if (div.classList.contains('second') || div.classList.contains('third')) div = div.parentNode;
-    div.style.opacity = '1';
 }
 
 function upDownElement(event) {
